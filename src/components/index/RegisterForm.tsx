@@ -32,6 +32,7 @@ export default function RegisterForm({ onSubmit }: RegisterFormPros) {
               <legend className="text-md px-2">Firstname</legend>
               <input
                 className="w-full h-full p-4 rounded-md bg-slate-800 outline-none"
+                title="name" 
                 placeholder=" "
                 type="text"
                 name="firstname"
@@ -40,6 +41,7 @@ export default function RegisterForm({ onSubmit }: RegisterFormPros) {
             <fieldset className="w-full h-full border-2 border-slate-300">
               <legend className="text-md px-2">Lastname</legend>
               <input
+                title="lastname" 
                 className="w-full h-full p-4 rounded-md bg-slate-800 outline-none"
                 placeholder=" "
                 type="text"
@@ -49,15 +51,17 @@ export default function RegisterForm({ onSubmit }: RegisterFormPros) {
           </div>
           <div className="h-2/6 w-5/6 flex">
             <input
+              title="email"
               className="w-full h-full p-4 border-2 
                 border-slate-300 rounded-md bg-slate-800 outline-none"
               placeholder="email"
-              type="text"
+              type="email"
               name="email"
             />
           </div>
           <div className="h-2/6 w-5/6 flex">
             <input
+              title="username"
               className="w-full h-full p-4 border-2 
                 border-slate-300 rounded-md bg-slate-800 outline-none"
               placeholder="username"
@@ -67,6 +71,7 @@ export default function RegisterForm({ onSubmit }: RegisterFormPros) {
           </div>
           <div className="h-2/6 w-5/6 flex items-center justify-evenly gap-2">
             <input
+              title="password"
               className="w-full h-full p-4 border-2 
                 border-slate-300 rounded-md bg-slate-800 outline-none"
               placeholder="password"
@@ -74,6 +79,7 @@ export default function RegisterForm({ onSubmit }: RegisterFormPros) {
               name="password"
             />
             <input
+              title="confirmPassword"
               className="w-full h-full p-4 border-2 
                 border-slate-300 rounded-md bg-slate-800 outline-none"
               placeholder="confirm password"
