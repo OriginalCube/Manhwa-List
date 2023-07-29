@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import React from "react";
 
 type RegisterFormPros = {
-  onSubmit: (register: FormData) => { success: string; error: string };
+  onSubmit: (register: FormData) => { success: string; error: boolean };
 };
 
 export default function RegisterForm({ onSubmit }: RegisterFormPros) {
@@ -11,28 +11,29 @@ export default function RegisterForm({ onSubmit }: RegisterFormPros) {
   const [hasAccount, setHasAccount] = React.useState(false);
   async function submittion(e: FormData) {
     const onRequest = await onSubmit(e);
-    if (onRequest.success) {
+    if (!onRequest.error) {
       localStorage.setItem("manhwa-list", onRequest.success);
       setError("");
-      redirect("/homepage");
+      redirect("/");
     } else {
-      setError(onRequest.error);
+      setError(onRequest.success);
     }
   }
 
   return (
-    <div className="w-2/6 h-3/6 text-white">
+    <div className="w-2/6 h-4/6 text-white bg-slate-900 rounded-md shadows-xl">
       {hasAccount ? (
         <form
           action={submittion}
-          className="w-full h-full flex flex-col gap-8 justify-center items-center text-xl"
+          className="w-full h-full flex flex-col gap-4 justify-center items-center text-xl"
         >
+          <p className="text-6xl mt-10">Create Account</p>
           <div className="h-2/6 w-5/6 flex items-center justify-evenly gap-2">
             <fieldset className="w-full h-full border-2 border-slate-300">
               <legend className="text-md px-2">Firstname</legend>
               <input
-                className="w-full h-full p-4 rounded-md bg-slate-800 outline-none"
-                title="name" 
+                className="w-full h-full p-4 rounded-md bg-transparent outline-none"
+                title="name"
                 placeholder=" "
                 type="text"
                 name="firstname"
@@ -41,57 +42,69 @@ export default function RegisterForm({ onSubmit }: RegisterFormPros) {
             <fieldset className="w-full h-full border-2 border-slate-300">
               <legend className="text-md px-2">Lastname</legend>
               <input
-                title="lastname" 
-                className="w-full h-full p-4 rounded-md bg-slate-800 outline-none"
+                title="lastname"
+                className="w-full h-full p-4 rounded-md bg-transparent outline-none"
                 placeholder=" "
                 type="text"
                 name="lastname"
               />
             </fieldset>
           </div>
-          <div className="h-2/6 w-5/6 flex">
+          <fieldset className="h-2/6 w-5/6 border-2 border-slate-300">
+            <legend className="text-md px-2">Email</legend>
             <input
               title="email"
-              className="w-full h-full p-4 border-2 
-                border-slate-300 rounded-md bg-slate-800 outline-none"
-              placeholder="email"
+              className="w-full h-full p-4 rounded-md bg-transparent outline-none"
               type="email"
               name="email"
             />
-          </div>
-          <div className="h-2/6 w-5/6 flex">
+          </fieldset>
+          <fieldset className="h-2/6 w-5/6 border-2 border-slate-300">
+            <legend className="text-md px-2">Username</legend>
             <input
               title="username"
-              className="w-full h-full p-4 border-2 
-                border-slate-300 rounded-md bg-slate-800 outline-none"
-              placeholder="username"
+              className="w-full h-full p-4 rounded-md bg-transparent outline-none"
               type="text"
               name="username"
             />
-          </div>
+          </fieldset>
           <div className="h-2/6 w-5/6 flex items-center justify-evenly gap-2">
-            <input
-              title="password"
-              className="w-full h-full p-4 border-2 
-                border-slate-300 rounded-md bg-slate-800 outline-none"
-              placeholder="password"
-              type="password"
-              name="password"
-            />
-            <input
-              title="confirmPassword"
-              className="w-full h-full p-4 border-2 
-                border-slate-300 rounded-md bg-slate-800 outline-none"
-              placeholder="confirm password"
-              type="password"
-              name="confirmPassword"
-            />
+            <fieldset className="w-full h-full border-2 border-slate-300">
+              <legend className="text-md px-2">Password</legend>
+              <input
+                title="password"
+                className="w-full h-full p-4 rounded-md bg-transparent outline-none"
+                type="password"
+                name="password"
+              />
+            </fieldset>
+            <fieldset className="w-full h-full border-2 border-slate-300">
+              <legend className="text-md px-2">Confirm Password</legend>
+              <input
+                title="confirmPassword"
+                className="w-full h-full p-4 rounded-md bg-transparent outline-none"
+                type="password"
+                name="confirmPassword"
+              />
+            </fieldset>
           </div>
-          <p className="text-xl">{error}</p>
+          <div className="flex flex-col gap-2 items-center justify-center">
+            <p className="text-sm text-red-500">{error}</p>
+            <p className="text-bs text-light">
+              Don't have an account?
+              <span
+                onClick={() => setHasAccount(false)}
+                className="hover:text-blue-500 cursor-pointer"
+              >
+                {" "}
+                Create Now
+              </span>
+            </p>{" "}
+          </div>
           <div className="w-full h-2/6 flex items-center justify-center">
             <button
-              className="text-xl p-2 px-4 border-2 border-slate-300 
-                rounded-md hover:bg-slate-300 hover:text-slate-800"
+              className="text-2xl p-2 px-4 border-2 hover:bg-slate-300 hover:text-slate-800
+                border-slate-300 rounded-sm font-light"
             >
               Create
             </button>
@@ -106,7 +119,8 @@ export default function RegisterForm({ onSubmit }: RegisterFormPros) {
             <fieldset className="h-24 w-5/6 border-2">
               <legend className="text-md px-2">Username</legend>
               <input
-                className="w-full h-full p-4 border-slate-300 rounded-md bg-slate-800 outline-none"
+                title="username"
+                className="w-full h-full p-4 border-slate-300 rounded-md bg-transparent outline-none"
                 type="text"
                 name="username"
                 placeholder=" "
@@ -115,24 +129,24 @@ export default function RegisterForm({ onSubmit }: RegisterFormPros) {
             <fieldset className="h-24 w-5/6 border-2">
               <legend className="text-md px-2">Password</legend>
               <input
-                className="w-full h-full p-4 border-slate-300 rounded-md bg-slate-800 outline-none"
+                title="password"
+                className="w-full h-full p-4 border-slate-300 rounded-md bg-transparent outline-none"
                 type="password"
                 name="password"
                 placeholder=" "
               />
             </fieldset>
             <p className="text-light text-bs">
-              Do you have an account already?
+              Do you have an account already?{" "}
               <span
                 className="cursor-pointer"
                 onClick={() => setHasAccount(true)}
               >
-                {" "}
                 Login Now!
               </span>
             </p>
             <button
-              className="text-2xl p-2 px-4 border-2 
+              className="text-2xl p-2 px-4 border-2 hover:text-blue-500
                 border-slate-300 rounded-md font-light"
             >
               Login

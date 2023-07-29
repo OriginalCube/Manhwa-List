@@ -1,3 +1,3 @@
-export default function Homepage() {
+export default function Blog() {
   return <div className="w-full h-auto"></div>;
 }
