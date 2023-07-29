@@ -1,6 +1,20 @@
+"use client"
+
 import React from 'react';
 
-export default function Review() {
+type ReviewProps = {
+  submitReview : (formData : FormData, genre : {action : boolean,
+  romance : boolean,
+  mystery : boolean,
+  comedy : boolean,
+  drama : boolean}) => void
+}
+
+export default function Review({submitReview}: ReviewProps) {
+
+  async function onSubmit(form:FormData){
+    submitReview(form, genre);
+  }
 
   const [genre, setGenre] = React.useState({
     action : false,
@@ -8,11 +22,8 @@ export default function Review() {
     mystery : false,
     comedy : false,
     drama : false
-  })
+  });
 
-  const onSubmit = (e:FormData) => {
-    console.log(e.get("genre"))
-  }
   return (
     <div className="w-4/6 h-auto flex flex-col gap-4">
       <div className="flex w-full h-auto">
@@ -74,7 +85,7 @@ export default function Review() {
                     type="checkbox"
                     name="genre"
                     value={genre.action?"true" : "false"}
-                    onChange={(e)=> setGenre({...genre,action : e.target.value==="true"? true : false})} 
+                    onChange={(e)=> setGenre({...genre,action : e.target.value==="false"? true : false})} 
                     title="genre"
                   />
                   <label className="text-xl">Action</label>
@@ -84,7 +95,7 @@ export default function Review() {
                     type="checkbox"
                     name="genre"
                     value={genre.romance?"true" : "false"}
-                    onChange={(e)=> setGenre({...genre,romance: e.target.value==="true"? true : false})} 
+                    onChange={(e)=> setGenre({...genre,romance: e.target.value==="false"? true : false})} 
                     title="genre"
                   />
                   <label className="text-xl">Romance</label>
@@ -93,7 +104,8 @@ export default function Review() {
                   <input
                     type="checkbox"
                     name="genre"
-                    value={"mystery"}
+                    value={genre.mystery?"true" : "false"}
+                    onChange={(e)=> setGenre({...genre,mystery: e.target.value==="false"? true : false})} 
                     title="genre"
                   />
                   <label className="text-xl">Mystery</label>
@@ -102,7 +114,8 @@ export default function Review() {
                   <input
                     type="checkbox"
                     name="genre"
-                    value={"comedy"}
+                    value={genre.comedy?"true" : "false"}
+                    onChange={(e)=> setGenre({...genre,comedy: e.target.value==="false"? true : false})} 
                     title="genre"
                   />
                   <label className="text-xl">Comedy</label>
@@ -111,7 +124,8 @@ export default function Review() {
                   <input
                     type="checkbox"
                     name="genre"
-                    value={"drama"}
+                    value={genre.drama?"true" : "false"}
+                    onChange={(e)=> setGenre({...genre,drama: e.target.value==="false"? true : false})} 
                     title="genre"
                   />
                   <label className="text-xl">Drama</label>

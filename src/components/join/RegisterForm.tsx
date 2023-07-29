@@ -9,6 +9,7 @@ type RegisterFormPros = {
 export default function RegisterForm({ onSubmit }: RegisterFormPros) {
   const [error, setError] = React.useState("");
   const [hasAccount, setHasAccount] = React.useState(false);
+  
   async function submittion(e: FormData) {
     const onRequest = await onSubmit(e);
     if (!onRequest.error) {
