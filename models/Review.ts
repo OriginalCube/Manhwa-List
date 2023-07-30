@@ -7,6 +7,7 @@ const createSchema = new mongoose.Schema(
     rating: { type: Number, require: true },
     description: { type: String, require: true },
     genre: [{ type: String, require: true }],
+    image: { type: String, require: true },
   },
   { timestamps: true },
 );

@@ -2,6 +2,7 @@
 
 import React from "react";
 import Review from "./Review";
+import News from "./News";
 
 type MainProps = {
   submitReview: (
@@ -14,13 +15,18 @@ type MainProps = {
       drama: boolean;
     },
   ) => void;
+  submitNews: (form: FormData, key : string) => void;
 };
 
-export default function Main({ submitReview }: MainProps) {
+export default function Main({ submitReview, submitNews }: MainProps) {
   const [isReview, setIsReview] = React.useState(true);
   return (
     <div className="w-full h-auto flex items-center justify-center">
-      <Review submitReview={submitReview} />
+      {isReview ? (
+        <Review submitReview={submitReview} setIsReview={setIsReview} />
+      ) : (
+        <News setIsReview={setIsReview} submitNews={submitNews} />
+      )}
     </div>
   );
 }

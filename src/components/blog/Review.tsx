@@ -13,11 +13,13 @@ type ReviewProps = {
       drama: boolean;
     },
   ) => void;
+  setIsReview: (review: boolean) => void;
 };
 
-export default function Review({ submitReview }: ReviewProps) {
+export default function Review({ submitReview, setIsReview }: ReviewProps) {
   async function onSubmit(form: FormData) {
     submitReview(form, genre);
+    console.log(form.get("image"));
   }
 
   const [genre, setGenre] = React.useState({
@@ -32,7 +34,14 @@ export default function Review({ submitReview }: ReviewProps) {
     <div className="w-4/6 h-auto flex flex-col gap-4">
       <div className="flex w-full h-auto">
         <p className="text-6xl font-normal text-blue-300 py-4">
-          Create Manhwa Review
+          Create Manhwa Review{" "}
+          <span
+            onClick={() => setIsReview(false)}
+            className="text-sm p-2 hover:text-slate-800 
+          px-4 border-2 border-blue-300 rounded-full hover:bg-blue-300 cursor-pointer"
+          >
+            Post news
+          </span>
         </p>
       </div>
       <form
@@ -165,7 +174,12 @@ export default function Review({ submitReview }: ReviewProps) {
               </div>
             </fieldset>
           </div>
-          <div className="w-1/2 h-auto"></div>
+          <div className="w-1/2 flex flex-col justify-center items-center h-auto border-2">
+            <div className="w-5/6 h-5/6">
+              <img src="" alt="" />
+            </div>
+            <input type="file" name="image" title="image" />
+          </div>
         </div>
         <button
           type="submit"
