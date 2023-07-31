@@ -12,19 +12,21 @@ type genreProps = {
   drama: boolean;
 };
 
-const submitReview = async (formData: FormData, genre: genreProps) => {
+const submitReview = async (formData: FormData, genre: genreProps, key : string) => {
   "use server";
   try {
-    // await connectMongo();
-    // console.log("Connected to Mongo");
-    // const createReview = await ReviewModel.create({
-    //   title: formData.get("name"),
-    //   author: formData.get("author"),
-    //   rating: formData.get("rating"),
-    //   description: formData.get("description"),
-    //   genre: JSON.stringify(genre),
-    // });
-    // console.log(createReview);
+    await connectMongo();
+    const token = await cracker(key);
+    const createReview = await ReviewModel.create({
+      title: formData.get("name"),
+      author: token,
+      writer: formData.get("author"),
+      rating: formData.get("rating"),
+      description: formData.get("description"),
+      image : "nice",
+      genre: JSON.stringify(genre),
+    });
+    console.log(createReview);
   } catch (err) {
     console.log(err);
   }
@@ -34,11 +36,12 @@ const submitNews = async (form: FormData, key: string) => {
   "use server";
   try {
     await connectMongo();
-    // const createNews = await NewsModel.create({
-    //   title: form.get("title"),
-    //   description: form.get("description"),
-    // });
-    console.log(cracker(key));
+    const token = await cracker(key);
+    const createNews = await NewsModel.create({
+      title: form.get("title"),
+      author : token,
+      description: form.get("description"),
+    });
   } catch (err) {
     console.log(err);
   }

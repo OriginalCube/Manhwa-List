@@ -13,7 +13,7 @@ type MainProps = {
       mystery: boolean;
       comedy: boolean;
       drama: boolean;
-    },
+    }, key : string,
   ) => void;
   submitNews: (form: FormData, key : string) => void;
 };

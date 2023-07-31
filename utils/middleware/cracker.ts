@@ -5,12 +5,10 @@ const jwt = require("jsonwebtoken");
 const protect = async (key: string) => {
   if (key.length == 0) return;
 
-  let token;
-  token = key.split(" ")[1];
+  let token = key;
   const decode = jwt.verify(token, process.env.MANHWA_SECRET);
   const id = await UserModel.findById(decode.id).select("-password");
-  console.log(id);
-  return id;
+  return id._id;
 };
 
 export default protect;

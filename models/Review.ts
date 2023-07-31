@@ -3,7 +3,12 @@ import mongoose from "mongoose";
 const createSchema = new mongoose.Schema(
   {
     title: { type: String, require: true },
-    author: { type: String, require: true },
+    writer: { type: String, require: true },
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
+    },
     rating: { type: Number, require: true },
     description: { type: String, require: true },
     genre: [{ type: String, require: true }],
