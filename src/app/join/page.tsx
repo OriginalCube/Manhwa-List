@@ -24,6 +24,7 @@ async function onSubmit(register: FormData) {
     const createAccount = await User.create({
       firstname: register.get("firstname"),
       lastname: register.get("lastname"),
+      profile: `profile${Math.floor(Math.random() * 3 + 1)}.webp`,
       email: register.get("email"),
       password: hashedPassword,
       username: register.get("username"),

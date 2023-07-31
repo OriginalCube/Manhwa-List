@@ -2,7 +2,7 @@ import Main from "@/components/blog/Main";
 import connectMongo from "../../../utils/mongoose/connect";
 import ReviewModel from "../../../models/Review";
 import NewsModel from "../../../models/News";
-import cracker from '../../../utils/middleware/cracker'
+import cracker from "../../../utils/middleware/cracker";
 
 type genreProps = {
   action: boolean;
@@ -12,7 +12,11 @@ type genreProps = {
   drama: boolean;
 };
 
-const submitReview = async (formData: FormData, genre: genreProps, key : string) => {
+const submitReview = async (
+  formData: FormData,
+  genre: genreProps,
+  key: string,
+) => {
   "use server";
   try {
     await connectMongo();
@@ -23,7 +27,7 @@ const submitReview = async (formData: FormData, genre: genreProps, key : string)
       writer: formData.get("author"),
       rating: formData.get("rating"),
       description: formData.get("description"),
-      image : "nice",
+      image: "nice",
       genre: JSON.stringify(genre),
     });
     console.log(createReview);
@@ -39,7 +43,7 @@ const submitNews = async (form: FormData, key: string) => {
     const token = await cracker(key);
     const createNews = await NewsModel.create({
       title: form.get("title"),
-      author : token,
+      author: token,
       description: form.get("description"),
     });
   } catch (err) {

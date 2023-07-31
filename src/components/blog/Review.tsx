@@ -11,14 +11,15 @@ type ReviewProps = {
       mystery: boolean;
       comedy: boolean;
       drama: boolean;
-    }, key : string
+    },
+    key: string,
   ) => void;
   setIsReview: (review: boolean) => void;
 };
 
 export default function Review({ submitReview, setIsReview }: ReviewProps) {
   async function onSubmit(form: FormData) {
-    submitReview(form, genre, localStorage.getItem('manhwa-list')||"");
+    submitReview(form, genre, localStorage.getItem("manhwa-list") || "");
   }
 
   const [genre, setGenre] = React.useState({

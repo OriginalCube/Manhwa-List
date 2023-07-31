@@ -1,13 +1,12 @@
 type NewsProps = {
   setIsReview: (res: boolean) => void;
-  submitNews: (form: FormData, key : string) => void;
+  submitNews: (form: FormData, key: string) => void;
 };
 
 export default function News({ setIsReview, submitNews }: NewsProps) {
-  
-  const onSubmit = (e : FormData) =>{
+  const onSubmit = (e: FormData) => {
     submitNews(e, localStorage.getItem("manhwa-list") || "");
-  }  
+  };
 
   return (
     <div className="h-auto w-4/6 flex gap-4 flex-col text-white">

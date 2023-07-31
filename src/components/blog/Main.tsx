@@ -13,9 +13,10 @@ type MainProps = {
       mystery: boolean;
       comedy: boolean;
       drama: boolean;
-    }, key : string,
+    },
+    key: string,
   ) => void;
-  submitNews: (form: FormData, key : string) => void;
+  submitNews: (form: FormData, key: string) => void;
 };
 
 export default function Main({ submitReview, submitNews }: MainProps) {
