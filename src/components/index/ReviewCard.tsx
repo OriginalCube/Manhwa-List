@@ -11,7 +11,6 @@ export default function ReviewCard({
   image,
   genre,
 }: ReviewCardProps) {
-  console.log(JSON.parse(genre[0]));
   return (
     <div
       className="w-48 h-auto cursor-pointer flex gap-1 flex-col items-center justify-start 

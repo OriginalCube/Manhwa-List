@@ -6,7 +6,6 @@ export async function GET(req: Request, res: Response) {
   connect();
   try {
     const getReviews = await Review.find({});
-    console.log(getReviews);
     return NextResponse.json({ message: getReviews });
   } catch (err) {
     console.log(err);
