@@ -2,6 +2,8 @@
 
 This is a simple web-app that allows user to view or create post regarding Manhwas. They will also be able to see description regarding the manhwa that they want to see provided by the admins of the website. This website will also provide news regarding to current trends regarding manhwas.
 
+<img src="https://i.imgur.com/dL7ACRR.png" />
+
 ## Time spent developing
 
 Started on July 26 ~ Still currently working on it!
